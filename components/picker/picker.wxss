@@ -1,0 +1,69 @@
+/* components/picker/picker.wxss */
+.pickerContainer {
+  position: fixed; /*生成绝对定位的元素，相对于浏览器窗口进行定位。*/
+  left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	z-index: 9999;
+	opacity: 0;
+  background:rgba(0,0,0,.4);
+  transition: all .4s ease-in-out 0;
+	pointer-events: none;/* none表示鼠标事件“穿透”该元素并且指定该元素“下面”的任何东西。*/
+}
+
+.pickerContainer.showPicker {
+  opacity: 1;
+  pointer-events: auto; 
+}
+
+.picker {
+  width: 100%;
+  height: 240px;
+  background-color: #fff;
+  position: absolute;
+  bottom: 0;
+  transition:all .4s ease-in-out 0;
+}
+.picker-hd {
+  height: 20%;
+  box-sizing: border-box; /*为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制*/
+  border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+.cancelType {
+  color: #07c160;
+}
+.sureType {
+  color: #07c160;
+}
+.picker-bd {
+  position: absolute;
+  width: 100%;
+  height: 80%;
+  /* top: 20%;
+  bottom: 0px;
+  left: 0px;  */
+}
+.picker-line { /*设置可供选择行的样式*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17px;
+}
+picker-view-column {
+  width: 100%;
+  height: 192px;
+}
+.indicator-class {
+  height: 38px;
+}
+.line1{
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	lines: 1;
+}

@@ -1,0 +1,5 @@
+/**index.wxss**/
+.showData {
+  display: flex;
+  flex-direction: column;
+}

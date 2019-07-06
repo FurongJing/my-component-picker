@@ -1,0 +1,29 @@
+<!--components/picker/picker.wxml-->
+<view class="pickerContainer {{isOpen ? 'showPicker' : ''}}">
+  <view class='picker'>
+    <view class='picker-hd'>
+      <view class="cancelType" bindtap="cancelBtn">
+        <text>取消</text>
+      </view>
+      <text>{{titleText}}</text>
+      <view class='sureType' bindtap='sureBtn'>
+        <text>确定</text>
+      </view>
+    </view>
+    <!-- showOptions:[Object Object],[Object Object]  -->
+    <view class='picker-bd'>
+      <picker-view 
+      value="{{value}}"
+      indicator-class="indicator-class" 
+      indicator-style="{{indicatorStyle}}"
+      bindchange="_bindchange" 
+      mask-style="{{maskStyle}}">
+        <picker-view-column wx:for="{{showOptions}}" wx:key="{{index}}">
+          <view wx:for="{{item}}" wx:key="{{index}}" wx:for-item="itemIn" class='picker-line'>
+            <text class='line1'>{{isUseKeywordOfShow?itemIn.name:itemIn}}</text> 
+          </view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</view>

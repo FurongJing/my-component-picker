@@ -1,0 +1,19 @@
+<!--index.wxml-->
+
+  <button type="primary" size="default" bindtap="showPicker"> 点我 </button>
+  <text class='showData'>选择数据：{{chooseData}}</text>
+  <text class='showData'>选择索引：{{chooseIndex}}</text>
+  <picker 
+  is-show-picker="{{isShow}}" 
+  title-text="真实班级" 
+  bindcancle="cancelPicker"
+  bindsure="surePicker_02"
+  columns-data="{{columnsData_02}}"
+  scroll-type="link"
+  keyWordsOfShow="name"
+  mask-style=""
+  indicator-style="background-color: #ddd;z-index:0"
+  >
+  </picker>
+  <!-- keyWordsOfShow="name" -->
+   <!-- default-picker-data="{{defaultPickerData}}" -->
