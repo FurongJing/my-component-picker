@@ -3,137 +3,250 @@
 
 Page({
   data: {
-    isShow: false,
+    isShow_00: false,
+    isShow_01: false,
+    isShow_02: false,
+
     columnsData_00: [['太阳', '月亮', '星星', '地球', '火星']],
-    defaultPickerData_00: [1],
-    columnsData_01: [['男', '女'], ['已婚', '未婚'], ['在职', '离职']],
+    defaultPickerData_00: [2],
+    chooseData_00: [],
+
+    columnsData_01: [['男', '女'], ['已婚', '未婚'], ['求职', '在职', '离职']],
     defaultPickerData_01: [0, 1, 0],
-    chooseData: [], // 选中的数据
-    chooseIndex: "", //选中的索引
+    chooseData_01: [], // 选中的数据
+    
     columnsData_02: [
       {
-        name: '动物',
+        name: '幼儿园',
         id: 1,
         children: [
           {
-            name: '鱼',
+            name: '托班',
             id: 11,
             children: [
               {
-                name: '草鱼',
+                name: '一班',
                 id: 111
-              },
-              {
-                name: '鲫鱼',
-                id: 112
-              },
-              {
-                name: '鲢鱼',
-                id: 113
               }
             ]
           },
           {
-            name: '蛇',
+            name: '小班',
             id: 12,
             children: [
               {
-                name: '蟒蛇',
+                name: '一班',
                 id: 121
               },
               {
-                name: '眼镜蛇',
+                name: '二班',
                 id: 122
+              }
+            ]
+          },
+          {
+            name: '中班',
+            id: 13,
+            children: [
+              {
+                name: '一班',
+                id: 131
               },
               {
-                name: '水蛇',
-                id: 123
+                name: '二班',
+                id: 132
+              }
+            ]
+          },
+          {
+            name: '大班',
+            id: 14,
+            children: [
+              {
+                name: '一班',
+                id: 141
+              },
+              {
+                name: '二班',
+                id: 142
+              },
+              {
+                name: '三鱼',
+                id: 143
+              }
+            ]
+          },
+        ]
+      },
+      {
+        name: '小学',
+        id: 2,
+        children: [
+          {
+            name: '一年级',
+            id: 21,
+            children: [
+              {
+                name: '一班',
+                id: 211
+              },
+              {
+                name: '二班',
+                id: 212
+              },
+              {
+                name: '三班',
+                id: 213
+              }
+            ]
+          },
+          {
+            name: '二年级',
+            id: 22,
+            children: [
+              {
+                name: '一班',
+                id: 221
+              },
+              {
+                name: '二班',
+                id: 222
+              },
+              {
+                name: '三班',
+                id: 223
+              },
+              {
+                name: '四班',
+                id: 224
               }
             ]
           }
         ]
       },
       {
-        name: '植物',
-        id: 2,
+        name: '初中',
+        id: 3,
         children: [
           {
-            name: '树',
-            id: 21,
+            name: '初一',
+            id: 31,
             children: [
               {
-                name: '梧桐树',
-                id: 211
+                name: '1901班',
+                id: 311
               },
               {
-                name: '银杏树',
-                id: 212
+                name: '1902班',
+                id: 312
               },
               {
-                name: '杉树',
-                id: 213
+                name: '1903班',
+                id: 313
               }
             ]
           },
           {
-            name: '花',
-            id: 22,
+            name: '初二',
+            id: 32,
             children: [
               {
-                name: '玫瑰',
-                id: 221
+                name: '1801班',
+                id: 321
               },
               {
-                name: '紫罗兰',
-                id: 222
+                name: '1802班',
+                id: 322
               },
               {
-                name: '菊花',
-                id: 223
+                name: '1803班',
+                id: 323
+              }
+            ]
+          },
+          {
+            name: '初三',
+            id: 33,
+            children: [
+              {
+                name: '1701班',
+                id: 331
               },
               {
-                name: '牡丹',
-                id: 224
+                name: '1702班',
+                id: 332
+              },
+              {
+                name: '1703班',
+                id: 333
+              },
+              {
+                name: '1704班',
+                id: 334
               }
             ]
           }
         ]
       }
     ],
+  
     defaultPickerData_02: [
       { id: 2 }, { id: 21 }, { id: 213 }
-    ]
+    ],
+    chooseData_02: [], // 选中的数据
   },
+
   // 显示picker
-  showPicker: function() {
+  showPicker_00: function () {
     this.setData({
-      isShow: true
+      isShow_00: true
     })
   },
   // 点击取消按钮触发的事件
-  cancelPicker: function(e) {
+  cancelPicker_00: function (e) {
     this.setData({
-      isShow: false
+      isShow_00: false
     })
   },
   // 点击确定按钮，将选择的数据显示在页面上
-  surePicker(e) {
-    // e为一个数据，是选中要显示在页面上的值
-    // let chooseContent = new Array(index.length).fill(0)
-    // for(let i = 0; i < index.length; i++) {
-    //   chooseContent[i] = this.data.columnsData[i][index[i]]
-    // }
+  surePicker_00(e) {
     this.setData({
-      isShow: false,
-      // chooseIndex: index,
-      chooseData: e.detail.value
+      isShow_00: false,
+      chooseData_00: e.detail
+    })
+  },
+
+  showPicker_01: function () {
+    this.setData({
+      isShow_01 : true
+    })
+  },
+  cancelPicker_01: function (e) {
+    this.setData({
+      isShow_01: false
+    })
+  },
+  surePicker_01(e) {
+    this.setData({
+      isShow_01: false,
+      chooseData_01: e.detail
+    })
+  },
+
+  showPicker_02: function () {
+    this.setData({
+      isShow_02: true
+    })
+  },
+  cancelPicker_02: function (e) {
+    this.setData({
+      isShow_02: false
     })
   },
   surePicker_02(e) {
     this.setData({
-      isShow: false,
-      chooseData: JSON.stringify(e.detail)
-      // chooseIndex: JSON.stringify(e.detail.choosedIndexArr)
+      isShow_02: false,
+      chooseData_02: JSON.stringify(e.detail)
     })
   }
 })

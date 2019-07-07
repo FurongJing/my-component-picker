@@ -103,9 +103,15 @@ Component({
           choosedData: this._getBackDataFromValue(this.data.tempValue)
         })
       }
-      this.setData({
-        backData: this.data.choosedData
-      })
+      if (isPlainObject(this.data.choosedData[0])){
+        this.setData({
+          backData: this.data.choosedData
+        })
+      }else {
+        this.setData({
+          backData: this.data.tempValue
+        })
+      }
       // let choosedValue = this._getChoosedValue(this.data.choosedData)
       this.triggerEvent('sure', this.data.choosedData)
       this._closePicker()
@@ -118,7 +124,8 @@ Component({
       switch (scrollType) {
         case "normal": 
           this.setData({
-            choosedData: changeValue
+            tempValue: changeValue
+            // choosedData: changeValue
           })
           break;
         case "link": 
@@ -150,7 +157,6 @@ Component({
           })
           break;  
       }
-      // this.triggerEvent('change', choosedData)
     },
     // 打开picker
     _openPicker() {
@@ -158,32 +164,15 @@ Component({
       // let defaultPickerData = this.properties.defaultPickerData
       // 若果不是第一次打开，pickerview直接定位到上一次的选择
       if(!this.data.isFirstOpen) {
-        if (showOptions.length !== 0) {
+        if (showOptions.length !== 0 && this.properties.scrollType == "link") {
           this._setDefault(this._computedBackData(this.data.backData))
+        }else{
+          this._setDefault(this.data.backData)
         }
       } 
       this.setData({
         isOpen: true
       })
-      // else { // 如果是第一次打开的话
-      //   let index = []
-      //   let chooseValue = []
-      //   // 需要判断用户是否设置了默认值
-      //   if (defaultPickerData.length != 0) { // 用户设置了默认值
-      //     console.log("用户设置了默认值")
-      //   }else { // 用户没有设置默认值
-      //     // 将默认值设置为每一列下标{name: "动物", id: 1}
-      //     let lasstIndex = new Array(showOptions.length).fill(0)
-      //     // this.data.lastValue = new Array(showOptions.length).fill(0)
-      //     // 取出初始下标对应选择所对应的值
-      //     // for (let i = 0; i < showOptions.length; i++) {
-      //     //   index = lastIndex[i]
-      //     //   chooseValue[i] = showOptions[i][0].name
-      //     // }
-      //     // this.data.chooseValue = this.data.lastValue
-      //   }
-      // }
-      
     },
     // 隐藏picker
     _closePicker() {
@@ -205,9 +194,15 @@ Component({
       } 
       // 如果设置默认显示的数据,则将lastValue设置为default
       if (defaultPickerData.length > 0){ 
-        this.setData({
-          lastValue: defaultPickerData
-        })
+        if (scrollType == "link") {
+          this.setData({
+            lastValue: this._getBackDataFromValue(defaultPickerData)
+          })
+        }else {
+          this.setData({
+            lastValue: defaultPickerData
+          })
+        }
       }
     },
     // 给picker设置默认值
