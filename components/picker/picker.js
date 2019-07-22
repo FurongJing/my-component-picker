@@ -72,7 +72,7 @@ Component({
     lastValue: [], // 上次各个colum的选择的值
     tempValue: [],
     onlyKey: '',
-    value: [], //picker-view的value属性
+    value: [], //picker-view的value属性,用来指定默认显示的数据
     listDataTemp: '',
     defaultPickerDataTemp: '',
     isUseKeywordOfShow: false, //是否使用了关键字

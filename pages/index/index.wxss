@@ -1,5 +1,5 @@
 /**index.wxss**/
-.picker1, .picker2 {
+.picker1, .picker2{
   margin-top: 20px;
 }
 .showData {

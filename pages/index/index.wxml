@@ -1,5 +1,22 @@
 <!--index.wxml-->
-<view class='picker0'>
+<view class='picker3'>
+  <button type="default" size="default" bindtap="showPicker_03"> picker2三列联动 </button>
+  <text class='showData'>选择数据：{{chooseData}}</text>
+  <picker2 
+  is-show-picker="{{isShow_03}}" 
+  title-text="三列选择器"
+  bindcancle="cancelPicker_03"
+  bindsure="surePicker_03"
+  schoolColumn="{{schoolColumn}}"
+  gradeColumn="{{gradeColumn}}"
+  classColumn="{{classColumn}}"
+  defaultPickerData="{{defaultPickerData}}"
+  indicator-style="background-color: #ddd;z-index:0"
+  >
+  </picker2>
+</view>   
+
+<!-- <view class='picker0'>
   <button type="default" size="default" bindtap="showPicker_00"> 单列非联动 </button>
   <text class='showData'>选择数据：{{chooseData_00}}</text>
   <picker 
@@ -29,7 +46,7 @@
   indicator-style="background-color: #ddd;z-index:0"
   >
   </picker>
-</view>
+</view> 
 
 <view class='picker2'>
    <button type="default" size="default" bindtap="showPicker_02"> 多列联动 </button>
@@ -45,4 +62,6 @@
   indicator-style="background-color: #ddd;z-index:0"
   >
   </picker>
-</view>   
+</view>   -->
+
+
