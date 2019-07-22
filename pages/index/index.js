@@ -273,8 +273,9 @@ Page({
         classId: 4
       }
     ],
+    columns: 3,
     chooseData: [],
-    defaultPickerData: [0, 1, 1],
+    defaultPickerData: [1, 0, 1],
   },
   
   showPicker_03: function () {

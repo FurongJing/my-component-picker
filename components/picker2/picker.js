@@ -18,11 +18,13 @@ Component({
         }
       }
     },
+
     // 设置title
     titleText: {
       type: String,
       value: "自定义标题"
     },
+
     // 显示pickerview的数据
     schoolColumn: {  // 受教育程度-小学、初中、高中等
       type: Array,
@@ -31,27 +33,37 @@ Component({
         // 保证传入的数据长度不为0并且传入的数组元素为对象
         let isObject = (typeof ([...newVal]) === 'object')
         if (newVal.length === 0 || !isObject) return;
-
+        
         // 将newValue显示到pickerView中
         this._setPickerViewData();
         // this._setDefault()
       }
     },
+
     gradeColumn: {  // 年级-如初一、初二
       type: Array,
-      value: []
+      value: [],
+      observer: function(newVal) {
+        let isObject = (typeof ([...newVal]) === 'object')
+        if (newVal.length === 0 || !isObject) return;
+      }
     },
+
     classColumn: {  // 班级
       type: Array,
-      value: []
+      value: [],
+      observer: function (newVal) {
+        let isObject = (typeof ([...newVal]) === 'object')
+        if (newVal.length === 0 || !isObject) return;
+      }
     },
+
     // 设置用户设置的默认初始显示的数据
     defaultPickerData: {
       type: Array,
       value: [],
       observer: function (newVal) {
         if (newVal.length === 0) return;
-        // this._setTempData();
         this._setDefault(newVal)
       }
     },
@@ -60,11 +72,7 @@ Component({
       type: String,
       value: "link"
     },
-    // 使用关键字来显示选项
-    keyWordOfShow: {
-      type: String,
-      value: "name"
-    },
+    columns: Number, // picker-view有几列
     indicatorStyle: String, // 设置选择器中间选中框的样式
     maskStyle: String //设置蒙层的样式
   },
@@ -74,15 +82,14 @@ Component({
    */
   data: {
     isOpen: false,    // 控制是否打开picker
-    firstColumn: [],  // 显示在第一列
-    secondColumn: [],  // 显示在第二列
-    thirdColumn: [],  // 显示在第三列
+    firstColumn: [],  // 显示在第一列的数据
+    secondColumn: [],  // 显示在第二列的数据
+    thirdColumn: [],  // 显示在第三列的数据
     isFirstOpen: true, // 默认是第一次打开picker
     choosedData: [], // 用户最终选择的name值
     lastValue: [], // 前一次各个colum的选择的id值
     tempValue: [], // 记录选择器改变后的下标值
-    value: [], //picker-view的value属性,用来指定默认显示的数据
-    isUseKeywordOfShow: false, //是否使用了关键字
+    value: [], // picker-view的value属性,用来指定默认显示的数据
   },
 
   /**
@@ -105,17 +112,13 @@ Component({
       if (this.data.isFirstOpen) {
         this.setData({
           isFirstOpen: false,
-          lastValue: this.data.tempValue,
-          choosedData: this._getChoosedDataById(this.data.tempValue)
         })
       } 
-      // 如果不是第一次打开picker-view，需要将当前选择的值记录
-      else {
-        this.setData({
-          lastValue: this.data.tempValue,
-          choosedData: this._getChoosedDataById(this.data.tempValue)
-        })
-      }
+      // 需要将当前选择的值记录
+      this.setData({
+        lastValue: this.data.tempValue,
+        choosedData: this._getChoosedDataById(this.data.tempValue)
+      })
       this.triggerEvent('sure', this.data.choosedData)
       this._closePicker()
     },
@@ -167,41 +170,24 @@ Component({
     },
     
     /**
-     * 给picker-view设置数据，定义初始的lastVal和tempVal
+     * 定义初始的lastVal和tempVal
      */
     _setPickerViewData() {
-      let { defaultPickerData, scrollType, schoolColumn, classColumn } = this.properties
+      let { defaultPickerData, schoolColumn, classColumn, columns } = this.properties
+      // 判断是否有设置有默认显示数据
+      if (defaultPickerData.length == 0) {
+        defaultPickerData = [...new Array(columns).keys()].map(() => 0)
+      }
 
-      // 根据第一列数据的选择,显示第二列数据(初始进入默认第一个选择)
-      let gradeColumn = this._getMatchColumn(schoolColumn[0], "firstCol")
+      // 无pickerview默认值，默认第一列选择下标为0的数据
+      let gradeColumn = this._getMatchColumn(schoolColumn[defaultPickerData[0]], "firstCol")
       this.setData({
         firstColumn: schoolColumn,
         secondColumn: gradeColumn, 
-        thirdColumn: classColumn
+        thirdColumn: classColumn,
+        lastValue: defaultPickerData,
+        tempValue: defaultPickerData
       })
-      let {firstColumn, secondColumn, thirdColumn} = this.data
-
-      // 如果没有设置默认显示的数据,则将lastValue初始为0
-      if (defaultPickerData.length == 0) {
-        this.setData({
-          lastValue: [0, 0, 0],
-          tempValue: [0, 0, 0]
-        })
-      }
-      // 如果设置默认显示的数据,则将lastValue设置为default
-      if (defaultPickerData.length > 0) {
-        if (scrollType == "link") {
-          this.setData({
-            // lastValue: this._getBackDataFromValue(defaultPickerData)
-            lastValue: defaultPickerData,
-            tempValue: defaultPickerData
-          })
-        } else {
-          this.setData({
-            lastValue: defaultPickerData
-          })
-        }
-      }
     },
     
     /**
@@ -243,22 +229,23 @@ Component({
     },
     
     /**
-     * 给picker-view设置默认值
-     * @defaultArr(Array) 默认显示数据的下标数组
+     * 给picker-view设置初始值
+     * @defaultPickerData(Array) 初始显示数据的下标数组
      */
-    _setDefault(defaultArr) { 
+    _setDefault(defaultPickerData) { 
       let {scrollType} = this.properties
       switch (scrollType) {
         case "link":
           // 保证接收到的默认值为数组，并且数组的长度不为0
-          if (Array.isArray(defaultArr) && defaultArr.length > 0) {
+          if (Array.isArray(defaultPickerData) && defaultPickerData.length > 0) {
             this.setData({
-              value: defaultArr
+              value: defaultPickerData
             })
           }
           break;
       }
     },
+
     /**
      * 根据选择的下标来获取选择的value值
      * 若班级不选的话不展示在界面上

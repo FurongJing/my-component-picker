@@ -11,8 +11,11 @@
   gradeColumn="{{gradeColumn}}"
   classColumn="{{classColumn}}"
   defaultPickerData="{{defaultPickerData}}"
+  columns="{{columns}}"
+
   indicator-style="background-color: #ddd;z-index:0"
   >
+  <!--  defaultPickerData="{{defaultPickerData}}" -->
   </picker2>
 </view>   
 
