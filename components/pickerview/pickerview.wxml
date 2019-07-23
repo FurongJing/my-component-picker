@@ -1,0 +1,23 @@
+<!--components/pickerview/pickerview.wxml-->
+<picker-view 
+  value="{{value}}"
+  indicator-style="{{indicatorStyle}}"
+  bindchange="_bindchange" 
+  mask-style="{{maskStyle}}">
+  <picker-view-column wx:if="{{firstColumn.length != 0}}">
+    <view wx:for="{{firstColumn}}" wx:key="{{index}}" class='picker-line'>
+      <text class='line1'>{{item.schoolName}}</text> 
+    </view>
+  </picker-view-column>
+  <picker-view-column wx:if="{{secondColumn.length != 0}}">
+    <view wx:for="{{secondColumn}}" wx:key="{{index}}" class='picker-line'>
+      <text class='line1'>{{item.gradeName}}</text> 
+    </view>
+  </picker-view-column>
+  <picker-view-column wx:if="{{thirdColumn.length != 0}}">
+    <view wx:for="{{thirdColumn}}" wx:key="{{index}}" class='picker-line'>
+      <text class='line1'>{{item.className}}</text> 
+    </view>
+  </picker-view-column>
+</picker-view>
+  

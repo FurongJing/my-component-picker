@@ -49,22 +49,3 @@
   bottom: 0px;
   left: 0px;  */
 }
-.picker-line { /*设置可供选择行的样式*/
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 17px;
-}
-picker-view-column {
-  width: 100%;
-  height: 192px;
-}
-.indicator-class {
-  height: 38px;
-}
-.line1{
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	lines: 1;
-}

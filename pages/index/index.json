@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "picker": "../../components/picker/picker",
-    "picker2": "../../components/picker2/picker"
+    "my-picker-view": "../../components/pickerview/pickerview"
   }
 }

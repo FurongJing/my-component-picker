@@ -1,70 +1,12 @@
 <!--index.wxml-->
-<view class='picker3'>
-  <button type="default" size="default" bindtap="showPicker_03"> picker2三列联动 </button>
+<view>
   <text class='showData'>选择数据：{{chooseData}}</text>
-  <picker2 
-  is-show-picker="{{isShow_03}}" 
-  title-text="三列选择器"
-  bindcancle="cancelPicker_03"
-  bindsure="surePicker_03"
-  schoolColumn="{{schoolColumn}}"
-  gradeColumn="{{gradeColumn}}"
-  classColumn="{{classColumn}}"
-  defaultPickerData="{{defaultPickerData}}"
-  columns="{{columns}}"
-
-  indicator-style="background-color: #ddd;z-index:0"
-  >
-  <!--  defaultPickerData="{{defaultPickerData}}" -->
-  </picker2>
+  <my-picker-view
+    schoolColumn="{{schoolColumn}}"
+    gradeColumn="{{gradeColumn}}"
+    classColumn="{{classColumn}}"
+    defaultPickerData="{{defaultPickerData}}"
+    bindChange="bindChange"
+    indicator-style="background-color: #ddd;z-index:0"
+  ></my-picker-view>
 </view>   
-
-<!-- <view class='picker0'>
-  <button type="default" size="default" bindtap="showPicker_00"> 单列非联动 </button>
-  <text class='showData'>选择数据：{{chooseData_00}}</text>
-  <picker 
-  is-show-picker="{{isShow_00}}" 
-  title-text="单列非联动" 
-  bindcancle="cancelPicker_00"
-  bindsure="surePicker_00"
-  columns-data="{{columnsData_00}}"
-  scroll-type="normal"
-  default-picker-data="{{defaultPickerData_00}}"
-  indicator-style="background-color: #ddd;z-index:0"
-  >
-  </picker>
-</view>
-
-<view class='picker1'>
-  <button type="default" size="default" bindtap="showPicker_01"> 多列非联动 </button>
-  <text class='showData'>选择数据：{{chooseData_01}}</text>
-  <picker 
-  is-show-picker="{{isShow_01}}" 
-  title-text="多列非联动" 
-  bindcancle="cancelPicker_01"
-  bindsure="surePicker_01"
-  columns-data="{{columnsData_01}}"
-  default-picker-data="{{defaultPickerData_01}}"
-  scroll-type="normal"
-  indicator-style="background-color: #ddd;z-index:0"
-  >
-  </picker>
-</view> 
-
-<view class='picker2'>
-   <button type="default" size="default" bindtap="showPicker_02"> 多列联动 </button>
-  <text class='showData'>选择数据：{{chooseData_02}}</text>
-  <picker 
-  is-show-picker="{{isShow_02}}" 
-  title-text="多列联动"
-  bindcancle="cancelPicker_02"
-  bindsure="surePicker_02"
-  columns-data="{{columnsData_02}}"
-  default-picker-data="{{defaultPickerData_02}}"
-  scroll-type="link"
-  indicator-style="background-color: #ddd;z-index:0"
-  >
-  </picker>
-</view>   -->
-
-

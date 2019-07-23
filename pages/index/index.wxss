@@ -1,8 +1,4 @@
 /**index.wxss**/
-.picker1, .picker2{
-  margin-top: 20px;
-}
 .showData {
-  display: flex;
-  flex-direction: column;
+  font-size: 20px;
 }

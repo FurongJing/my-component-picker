@@ -10,29 +10,16 @@
         <text>确定</text>
       </view>
     </view>
+    
     <view class='picker-bd'>
-      <picker-view 
-      value="{{value}}"
-      indicator-class="indicator-class" 
-      indicator-style="{{indicatorStyle}}"
-      bindchange="_bindchange" 
-      mask-style="{{maskStyle}}">
-        <picker-view-column>
-          <view wx:for="{{firstColumn}}" wx:key="{{index}}" class='picker-line'>
-            <text class='line1'>{{item.schoolName}}</text> 
-          </view>
-        </picker-view-column>
-        <picker-view-column>
-          <view wx:for="{{secondColumn}}" wx:key="{{index}}" class='picker-line'>
-            <text class='line1'>{{item.gradeName}}</text> 
-          </view>
-        </picker-view-column>
-        <picker-view-column>
-          <view wx:for="{{thirdColumn}}" wx:key="{{index}}" class='picker-line'>
-            <text class='line1'>{{item.className}}</text> 
-          </view>
-        </picker-view-column>
-      </picker-view>
+      <jfr-picker-view
+        schoolColumn="{{schoolColumn}}"
+        gradeColumn="{{gradeColumn}}"
+        classColumn="{{classColumn}}"
+        defaultPickerData="{{defaultPickerData}}"
+        columns="{{columns}}"
+        indicator-style="background-color: #ddd;z-index:0">
+      </jfr-picker-view>
     </view>
   </view>
 </view>
